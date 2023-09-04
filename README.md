@@ -1,2 +1,2 @@
 # Sudoku-Solver
-A Sodoku Sovler I built during second year at university.
+A Sodoku Solver I built during my second year of university.
