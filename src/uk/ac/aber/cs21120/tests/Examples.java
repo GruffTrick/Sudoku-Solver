@@ -20,7 +20,7 @@ public class Examples {
      */
     static private int[][] getPuzzle(int n) {
         if(n>401)
-            throw new IndexOutOfBoundsException(n);
+            throw new IndexOutOfBoundsException();
         int offset = 9*n; // 9 strings per puzzle
         int[][] puzzle = new int[9][9];
         for(int y=0;y<9;y++){
