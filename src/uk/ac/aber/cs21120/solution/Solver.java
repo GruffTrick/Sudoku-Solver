@@ -6,6 +6,7 @@ import uk.ac.aber.cs21120.interfaces.ISolver;
 public class Solver implements ISolver {
 
     private final IGrid g;
+    private static final int size = 9;
 
     /**
      * Constructor for the Solver class
@@ -21,34 +22,42 @@ public class Solver implements ISolver {
      * a boolean if successful. It will call itself recursively to solve simpler grids (i.e. with
      * more digits filled in).
      *
+     * O(N^m), where N is the number of possibilities for each cell
+     * (in this case, 9 for a standard Sudoku puzzle),
+     * and m is the number of empty cells.
+     *
      * @return true if successful
      */
     @Override
     public boolean solve() {
-        //For every cell in grid:
-        for (int x = 0; x < 9; x++) {
-            for (int y = 0; y <9; y++) {
-                //Checks if cell is empty
-                if (g.get(x,y) == 0) {
-                    for (int val = 1; val <=9; val++) {
-                        g.set(x, y, val);
-                        //checks if value set is valid
+        // Loop through each cell in the Sudoku grid
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                // Check if the current cell is empty (contains 0)
+                if (g.get(row, col) == 0) {
+                    // Try filling the cell with values from 1 to size
+                    for (int val = 1; val <= size; val++) {
+                        // Check if the current value is valid in the current position
                         if (g.isValid()) {
-                            //calls solve to backtrack recursively
+                            // If valid, set the cell to the current value
+                            g.set(row, col, val);
+
+                            // Recursively attempt to solve the Sudoku puzzle with the new value
                             if (solve()) {
+                                // If the puzzle is solved, propagate the success
                                 return true;
-                            } else {    //if solution doesn't work, set cell to 0
-                                g.set(x, y, 0);
+                            } else {
+                                // If the puzzle cannot be solved with the current value, backtrack
+                                g.set(row, col, 0);
                             }
-                        } else {    //if value of cell is not valid, set to 0
-                            g.set(x,y,0);
                         }
                     }
+                    // If none of the values work for the current cell, backtrack to the previous cell
                     return false;
                 }
             }
         }
-        //returns true if solved
+        // If all cells are filled, the Sudoku puzzle is solved
         return true;
     }
 }
