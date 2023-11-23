@@ -23,7 +23,7 @@ public class Main {
             solver.solve();
             long timeTaken = System.currentTimeMillis()-timeStart;  //calculates time taken by subtracting start time from current time
             //print out the example number, number of gaps, time taken in milliseconds
-            System.out.format("%d,%d,%d%n",x,gaps,timeTaken);
+            System.out.format("Puzzle ID: %d, has %d gaps, took %dms to solve.%n",x,gaps,timeTaken);
         }
     }
 }
