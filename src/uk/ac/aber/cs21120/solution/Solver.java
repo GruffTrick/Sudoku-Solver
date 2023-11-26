@@ -21,7 +21,8 @@ public class Solver implements ISolver {
      * The solver method - this will attempt to solve the grid set by the constructor, returning
      * a boolean if successful. It will call itself recursively to solve simpler grids (i.e. with
      * more digits filled in).
-     *
+     * <p>
+     * Time complexity:
      * O(N^m), where N is the number of possibilities for each cell
      * (in this case, 9 for a standard Sudoku puzzle),
      * and m is the number of empty cells.
